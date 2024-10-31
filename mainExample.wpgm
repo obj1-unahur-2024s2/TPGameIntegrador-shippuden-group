@@ -1,18 +1,19 @@
 import wollok.game.*
+import personajes.*
+import UI.*
 
-import example.pepita
+program juego {
+    game.title("rpg")
+    game.boardGround("campoDeBatalla2.jpg")
+    game.height(8)
+    game.width(15)
+    game.addVisual(player)
+    game.addVisual(player2)
+    game.addVisual(player3)
+    game.addVisual(jefe)
+    game.addVisual(vidaPJ)
+    game.addVisual(vidaEnemigo)
+    //game.addVisual(menu)
 
-program PepitaGame {
-	game.title("Pepita")
-	game.height(10)
-	game.width(10)
-
-	// add assets in asset folder, for example, for the background
-  // game.boardGround("fondo2.jpg")
-
-	//
-
-	game.showAttributes(pepita) //Debug
-
-	game.start()
+    game.start()
 }
