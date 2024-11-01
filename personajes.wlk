@@ -1,5 +1,21 @@
 import wollok.game.*
+import UI.Menu
+import UI_opciones.*
+import assets.*
 
+
+
+object party{
+    //const grupo = [new PlayerTest(nombre = "test", fuerza = 10, inteligencia = 10)]
+
+    method iniciarAtaque(){
+        const enemigo = self.seleccionarEnemigo()
+    }
+
+    method seleccionarEnemigo(){
+        return
+    }
+}
 
 
 class Personaje {
@@ -8,11 +24,7 @@ class Personaje {
     var vida
     var defensa
     var position 
-    
-
-    
-  
-   
+     
     method image() = ""
     method position() = position
 

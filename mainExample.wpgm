@@ -1,18 +1,29 @@
 import wollok.game.*
 import personajes.*
 import UI.*
+import assets.*
+import archivoTest.*
 
 program juego {
     game.title("rpg")
-    game.boardGround("campoDeBatalla2.jpg")
-    game.height(8)
-    game.width(15)
+    game.boardGround(imagenes.campoDeBatalla())
+    game.cellSize(50)//esto ya es por defecto
+    game.height(16) // 800px
+    game.width(30)  // 1500px
+
+    //esto son pruebas, esta en el archivo "archivoTest"
+	testObject.iniciarPelea()
+    
+
+
+	/*
     game.addVisual(player)
     game.addVisual(player2)
     game.addVisual(player3)
     game.addVisual(jefe)
     game.addVisual(vidaPJ)
     game.addVisual(vidaEnemigo)
+	*/
     //game.addVisual(menu)
 
     game.start()

@@ -1,9 +1,12 @@
-import mainExample.*
+import assets.*
+import UI_opciones.*
 import personajes.*
 
 
+//Agrupe todo lo que es User Interface en este archivo
+//El objeto UI es el que se va a encargar de mostrar las cosas.
 object UI{
-    
+
 }
 
 class BarraDeVida {
@@ -40,19 +43,62 @@ object menu {
     
 }
 
+object cursor{
+    var position = game.at(15,5)//puse una posicon cualquiera
+    
+    method position() = position
+    method image() = imagenes.fondo()
+
+    method moverCursor(opcionMenu){
+        const x = opcionMenu.position().x()
+        const y = opcionMenu.position().y()
+        position = game.at(x - 2, y)
+    }
+}
+
+class Fondo{
+    method image() = imagenes.fondo()
+    const property position
+}
+
 class Menu{
-    const property opciones = [] 
+    const property opciones = []
+    const tipoDeMenu
+    const alto
+    const ancho
 
     var property opcionActual = opciones.first()
 
+    const posicionX = tipoDeMenu.x()
+    const posicionY = tipoDeMenu.y()
+
+    method renderizarMenu(){
+        self.renderizarFondo()
+        //self.renderizarOpciones()
+    }
+
+    method renderizarFondo(){
+        (0 .. 4).forEach({
+            n => game.addVisual(new Fondo(position = game.at(n,1)))
+        })
+
+
+    }
+
     method renderizarOpciones(){
-		opciones.forEach({opcion => game.addVisual(opcion)})
+        var offset = opciones.size() - 1
+    
+		opciones.forEach({opcion => 
+            opcion.position(game.at(posicionX,posicionY + offset ))
+            game.addVisual(opcion)
+            offset -= 1
+            })
 	}
 
-    method moverSiguienteopcion(){
+    method moverSiguienteOpcion(){
 		opcionActual = self.siguienteOpcion(opciones, opcionActual)
-		//return self.siguienteOpcion(labels, opcionActual)
-	}
+        cursor.moverCursor(opcionActual)
+    }
 
     method siguienteOpcion(lista, elemento){
         return if(elemento == lista.last()) lista.first() else self.siguienteElemento(lista,elemento)
@@ -76,4 +122,29 @@ class Menu{
 
 		return siguiente
     }
+
+    method moverAnteriorOpcion(){
+		opcionActual = self.anteriorOpcion(opciones, opcionActual)
+        cursor.moverCursor(opcionActual)
+    }
+
+    method anteriorOpcion(lista, elemento){
+        const reversedList = lista.reverse()
+		return if(elemento == reversedList.last()) reversedList.first() else self.siguienteElemento(reversedList,elemento)
+    }
+
+    method seleccionarOpcionActual(){
+        opcionActual.seleccionar()
+    }
+}
+
+//distintos tipos de menu (dan cosas como la posicion donde se muestra)
+object menuBatalla{
+    method x() = 2
+    method y() = 0
+}
+
+object menuAtaque{
+    method x() = 2
+    method y() = 0
 }
