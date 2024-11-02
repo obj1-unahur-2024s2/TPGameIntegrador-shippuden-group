@@ -44,10 +44,10 @@ object menu {
 }
 
 object cursor{
-    var position = game.at(15,5)//puse una posicon cualquiera
+    var position = game.at(15,5)//puse una posicon cualquiera para que no este vacio
     
     method position() = position
-    method image() = imagenes.fondo()
+    method image() = imagenes.cursor()
 
     method moverCursor(opcionMenu){
         const x = opcionMenu.position().x()
@@ -64,34 +64,42 @@ class Fondo{
 class Menu{
     const property opciones = []
     const tipoDeMenu
-    const alto
-    const ancho
+    const alto = opciones.size() // va a tener de alto la cantidad de opciones
+    const ancho = 3 //este 3 hay que probar como queda en otros menues
 
     var property opcionActual = opciones.first()
 
-    const posicionX = tipoDeMenu.x()
-    const posicionY = tipoDeMenu.y()
+    const posicionX = tipoDeMenu.x() + 1  //origen (celda de abajo a la izquierda)
+    const posicionY = tipoDeMenu.y() //origen
 
     method renderizarMenu(){
         self.renderizarFondo()
-        //self.renderizarOpciones()
+        self.renderizarOpciones()
+        game.addVisual(cursor)
+        cursor.moverCursor(opcionActual)
     }
 
     method renderizarFondo(){
-        (0 .. 4).forEach({
-            n => game.addVisual(new Fondo(position = game.at(n,1)))
-        })
 
+        const _ancho = ancho + posicionX - 1
+        const _alto = alto + posicionY - 1
+
+        (posicionX - 1 .. _ancho).forEach({
+            posX => 
+                (posicionY .. _alto).forEach({
+                    posY => game.addVisual(new Fondo(position = game.at(posX,posY)))
+                })
+        })
 
     }
 
     method renderizarOpciones(){
-        var offset = opciones.size() - 1
+        var offsetY = opciones.size() - 1
     
 		opciones.forEach({opcion => 
-            opcion.position(game.at(posicionX,posicionY + offset ))
+            opcion.position(game.at(posicionX + 1,posicionY + offsetY ))
             game.addVisual(opcion)
-            offset -= 1
+            offsetY -= 1
             })
 	}
 
@@ -141,7 +149,7 @@ class Menu{
 //distintos tipos de menu (dan cosas como la posicion donde se muestra)
 object menuBatalla{
     method x() = 2
-    method y() = 0
+    method y() = 2
 }
 
 object menuAtaque{
