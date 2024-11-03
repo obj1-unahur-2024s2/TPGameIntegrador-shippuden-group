@@ -7,14 +7,14 @@ import archivoTest.*
 program juego {
     game.title("rpg")
     game.boardGround(imagenes.campoDeBatalla())
-    game.cellSize(50)//esto ya es por defecto
+    game.cellSize(50) //esto ya es por defecto
     game.height(16) // 800px
     game.width(30)  // 1500px
 
     //esto son pruebas, esta en el archivo "archivoTest"
 	testObject.iniciarPelea()
     
-
+    
 
 	/*
     game.addVisual(player)

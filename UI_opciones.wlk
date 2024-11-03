@@ -7,8 +7,8 @@ object atacar{
     method text() = "Atacar"
     method textColor() = paleta.blanco()
 
-    method seleccionar(){
-        console.println(self)
+    method seleccionar(personaje){
+        personaje.atacar()
     }
 }
 
@@ -19,8 +19,8 @@ object magia{
     method text() = "Magia"
     method textColor() = paleta.blanco()
 
-    method seleccionar(){
-        console.println(self)
+    method seleccionar(personaje){
+        personaje.magia()
     }
 }
 
@@ -31,7 +31,8 @@ object items{
     method text() = "Items"
     method textColor() = paleta.blanco()
 
-    method seleccionar(){
+    //ver si uso los items de la party
+    method seleccionar(personaje){
         console.println(self)
     }    
 }
@@ -43,7 +44,7 @@ object escapar{
     method text() = "Escapar"
     method textColor() = paleta.blanco()
 
-    method seleccionar(){
+    method seleccionar(personaje){
         console.println(self)
     }    
 }

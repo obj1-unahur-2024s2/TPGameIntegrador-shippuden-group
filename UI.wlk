@@ -1,6 +1,7 @@
 import assets.*
 import UI_opciones.*
 import personajes.*
+import wollok.game.*
 
 
 //Agrupe todo lo que es User Interface en este archivo
@@ -61,8 +62,25 @@ class Fondo{
     const property position
 }
 
+    //mover a otro lado depsues esto
+object controles{
+    method activarControles(menu){
+        keyboard.up().onPressDo({ menu.moverAnteriorOpcion()})
+        keyboard.down().onPressDo({ menu.moverSiguienteOpcion()})
+        keyboard.enter().onPressDo({ menu.seleccionarOpcionActual()})
+    }
+
+    method desactivarControles(){
+        keyboard.up().onPressDo(null)
+        keyboard.down().onPressDo(null)
+        keyboard.enter().onPressDo(null)
+    }
+}
+
 class Menu{
     const property opciones = []
+    const visuals = []
+    var property quienLoUsa = null// cambiar de nombre
     const tipoDeMenu
     const alto = opciones.size() // va a tener de alto la cantidad de opciones
     const ancho = 3 //este 3 hay que probar como queda en otros menues
@@ -75,12 +93,14 @@ class Menu{
     method renderizarMenu(){
         self.renderizarFondo()
         self.renderizarOpciones()
+        visuals.add(cursor)
         game.addVisual(cursor)
         cursor.moverCursor(opcionActual)
     }
 
-    method renderizarFondo(){
 
+    method renderizarFondo(){//cambiar nombre a generar fondo
+        
         const _ancho = ancho + posicionX - 1
         const _alto = alto + posicionY - 1
 
@@ -90,7 +110,19 @@ class Menu{
                     posY => game.addVisual(new Fondo(position = game.at(posX,posY)))
                 })
         })
+        /*
+        const _ancho = ancho + posicionX - 1
+        const _alto = alto + posicionY - 1
 
+        (posicionX - 1 .. _ancho).forEach({
+            posX => 
+                (posicionY .. _alto).forEach({
+                    posY => visuals.add(new Fondo(position = game.at(posX,posY)))
+                })
+        })
+        */
+
+        controles.activarControles(self)
     }
 
     method renderizarOpciones(){
@@ -142,17 +174,18 @@ class Menu{
     }
 
     method seleccionarOpcionActual(){
-        opcionActual.seleccionar()
+        opcionActual.seleccionar(quienLoUsa)
+        controles.desactivarControles()
     }
 }
 
-//distintos tipos de menu (dan cosas como la posicion donde se muestra)
+//Esto podria reemplazarse por una clase MenuBatalla que herede de Menu y ponerle el metodo x() e y() en vez de pasarle tipo de menu
 object menuBatalla{
     method x() = 2
     method y() = 2
 }
 
-object menuAtaque{
+object menuMagia{
     method x() = 2
     method y() = 0
 }
