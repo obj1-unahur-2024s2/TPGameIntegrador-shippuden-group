@@ -2,13 +2,9 @@ import assets.*
 import UI_opciones.*
 import personajes.*
 import wollok.game.*
-
+import archivoTest.*
 
 //Agrupe todo lo que es User Interface en este archivo
-//El objeto UI es el que se va a encargar de mostrar las cosas.
-object UI{
-
-}
 
 class BarraDeVida {
     const position 
@@ -51,9 +47,15 @@ object cursor{
     method image() = imagenes.cursor()
 
     method moverCursor(opcionMenu){
+        if(game.hasVisual(self)) game.removeVisual(self) 
+        game.addVisual(self) 
+
         const x = opcionMenu.position().x()
         const y = opcionMenu.position().y()
+
         position = game.at(x - 2, y)
+        //console.println("" + opcionMenu + "position: " + opcionMenu.position())
+        //console.println("" + "cursor.position: " + self.position())
     }
 }
 
@@ -62,74 +64,53 @@ class Fondo{
     const property position
 }
 
-    //mover a otro lado depsues esto
-object controles{
-    method activarControles(menu){
-        keyboard.up().onPressDo({ menu.moverAnteriorOpcion()})
-        keyboard.down().onPressDo({ menu.moverSiguienteOpcion()})
-        keyboard.enter().onPressDo({ menu.seleccionarOpcionActual()})
-    }
 
-    method desactivarControles(){
-        keyboard.up().onPressDo(null)
-        keyboard.down().onPressDo(null)
-        keyboard.enter().onPressDo(null)
-    }
-}
 
 class Menu{
     const property opciones = []
     const visuals = []
-    var property quienLoUsa = null// cambiar de nombre
-    const tipoDeMenu
+    var property quienLoUsa = null// cambiar de nombre, variable para activar "quienLoUsa.Activar()"
+
     const alto = opciones.size() // va a tener de alto la cantidad de opciones
     const ancho = 3 //este 3 hay que probar como queda en otros menues
 
     var property opcionActual = opciones.first()
 
-    const posicionX = tipoDeMenu.x() + 1  //origen (celda de abajo a la izquierda)
-    const posicionY = tipoDeMenu.y() //origen
+    method posicionX()//origen X
+    method posicionY()//origen Y
 
     method renderizarMenu(){
         self.renderizarFondo()
         self.renderizarOpciones()
-        visuals.add(cursor)
-        game.addVisual(cursor)
+
+        //esta logica ponerla en otro metodo
+        //visuals.add(cursor)
+        //game.addVisual(cursor)
         cursor.moverCursor(opcionActual)
+        controles.cambiarDeMenu(self)
     }
 
-
-    method renderizarFondo(){//cambiar nombre a generar fondo
+    method renderizarFondo(){ 
+        //modificar este metodo para que renderice todo lo de una lista, y la logica de crearlo hcaerlo en otra lista
+        //a si es mas facil de borrar despues
         
-        const _ancho = ancho + posicionX - 1
-        const _alto = alto + posicionY - 1
+        const _ancho = ancho + self.posicionX() - 1
+        const _alto = alto + self.posicionY() - 1
 
-        (posicionX - 1 .. _ancho).forEach({
+        (self.posicionX() - 1 .. _ancho).forEach({
             posX => 
-                (posicionY .. _alto).forEach({
+                (self.posicionY() .. _alto).forEach({
                     posY => game.addVisual(new Fondo(position = game.at(posX,posY)))
                 })
         })
-        /*
-        const _ancho = ancho + posicionX - 1
-        const _alto = alto + posicionY - 1
-
-        (posicionX - 1 .. _ancho).forEach({
-            posX => 
-                (posicionY .. _alto).forEach({
-                    posY => visuals.add(new Fondo(position = game.at(posX,posY)))
-                })
-        })
-        */
-
-        controles.activarControles(self)
+        
     }
 
     method renderizarOpciones(){
         var offsetY = opciones.size() - 1
     
 		opciones.forEach({opcion => 
-            opcion.position(game.at(posicionX + 1,posicionY + offsetY ))
+            opcion.position(game.at(self.posicionX() + 1,self.posicionY() + offsetY ))
             game.addVisual(opcion)
             offsetY -= 1
             })
@@ -175,17 +156,24 @@ class Menu{
 
     method seleccionarOpcionActual(){
         opcionActual.seleccionar(quienLoUsa)
-        controles.desactivarControles()
     }
 }
 
-//Esto podria reemplazarse por una clase MenuBatalla que herede de Menu y ponerle el metodo x() e y() en vez de pasarle tipo de menu
-object menuBatalla{
-    method x() = 2
-    method y() = 2
+
+class MenuBatalla inherits Menu{
+    override method posicionX() = 2//origen X
+    override method posicionY() = 2//origen Y
+
+    const _opciones = [atacar,magia,items,escapar] //esto podria obtenerse del personaje, si queremos que tengan distintas opciones.
+
+    method initialize(){
+        opciones.addAll(_opciones)
+    }
 }
 
-object menuMagia{
-    method x() = 2
-    method y() = 0
+class MenuMagia inherits Menu{
+    override method posicionX() = 6
+    override method posicionY() = magia.position().y()
 }
+
+

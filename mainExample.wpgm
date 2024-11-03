@@ -11,6 +11,7 @@ program juego {
     game.height(16) // 800px
     game.width(30)  // 1500px
 
+    controles.activarControles()
     //esto son pruebas, esta en el archivo "archivoTest"
 	testObject.iniciarPelea()
     
