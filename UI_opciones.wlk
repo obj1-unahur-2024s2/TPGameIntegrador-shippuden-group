@@ -1,5 +1,7 @@
 import assets.*
 import UI.*
+import archivoTest.*
+import items.*
 
 //No se me ocurrio como hacerlo mejor. Dejo esto para los items, quizas sirva.
 class Opcion{
@@ -22,11 +24,28 @@ object atacar{
     }
 }
 
+//Este es un paso a paso de como crar un nuevo Menu y usarlo.
+//Primero instanciar un menu del tipo requerido. Actualmente esta creado MenuBatalla y SubMenuBatalla
+//En caso de requerir otro habria que crear otro heredandolo. 
+//Ejemplo creo SubMenuBatalla que SOLO crea un menu pero con otro origen, en este caso use la siguiente linea
+/*
+class SubMenuBatalla inherits Menu{
+    override method posicionX() = 6
+    override method posicionY() = magia.position().y()
+}*/
+//Para poder decirle que se cree desde la posicion X = 6 y la posicion Y desde la posicion Y desde la opcion Magia.
+//Como no se me ocurrio otra forma de vincularlo con el personaje, el menu tiene una variable llamada "quienLoUsa"
+//A si a la hora de ejecutar por ejemplo la opcion "atacar" esta ejectura quienLoUsa.atacar()
+//Por otro lado, todas las opciones renderiza el Menu, son todos los objetos que estan dentro de la lista opciones
+//Por eso aca, hago menuMagia.Opciones y le agrego todas las magias que posee el personaje.
+//Este personaje de ejemplo, tiene Magia Fuego y Magia Hielo, que son las que se muestran. Si tuviera menos o mas, se mostrarian mas.
+//Por ultimo, estando todo configurado el Menu, llamo a renderizarMenu. Esto trae el cursor, y toda su funcionalidad.
+
 object magia{
     var property position = game.at(1,1)
     method textColor() = paleta.blanco()
     method text() = "Magia"
-    const menuMagia = new MenuMagia()
+    const menuMagia = new SubMenuBatalla()
 
     method seleccionar(personaje){
         //mejorar este metodo
@@ -41,9 +60,20 @@ object items{
     var property position = game.at(1,1)
     method textColor() = paleta.blanco()
     method text() = "Items"
+    const menuItems = new MenuItems()
 
     method seleccionar(personaje){
-        console.println("ejecutar menuItems de la party")
+        if(party.inventario().isEmpty()){
+            console.println("TODO: Enviar un sonido o hacer algo, pero que no muestre un menu vacio, o ver que hacemos.")
+        }else{
+            self.ejecutarSeleccion()
+        }
+    }
+
+    method ejecutarSeleccion(){
+        menuItems.quienLoUsa(menuItems)
+        menuItems.opciones().addAll(party.inventario())
+        menuItems.renderizarMenu()
     }
 }
 

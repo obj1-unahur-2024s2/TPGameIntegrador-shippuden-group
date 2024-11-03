@@ -14,7 +14,6 @@ class BarraDeVida {
     method position() = position 
 
     method text() = "hp" + player.vida()
-
 }
 
 class VidaEnemiga inherits BarraDeVida {
@@ -157,6 +156,17 @@ class Menu{
     method seleccionarOpcionActual(){
         opcionActual.seleccionar(quienLoUsa)
     }
+
+    method quitarMenu(){
+        //Este metodo tiene que remover TODOS los visuales que se renderizaron. Por lo tanto
+        //hay que modificar el metodo renderizarOpciones, para que antes de renderizarlas, las guarde en una lista.
+        //Y despues remover todos los visuales de esta lista.
+    }
+
+    method volverMenuAnterior(){
+        //primero ejecutar self.quitarMenu()
+        //y despues el cursor tiene que ir al menur anterior. Habria que guardar una referencia al menu y opcion anterior.
+    }
 }
 
 
@@ -171,9 +181,12 @@ class MenuBatalla inherits Menu{
     }
 }
 
-class MenuMagia inherits Menu{
+class SubMenuBatalla inherits Menu{
     override method posicionX() = 6
     override method posicionY() = magia.position().y()
 }
 
-
+class MenuItems inherits Menu{
+    override method posicionX() = 6
+    override method posicionY() = items.position().y()
+}

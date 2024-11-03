@@ -3,6 +3,8 @@ import UI.*
 import wollok.game.*
 import UI_opciones.*
 import assets.*
+import items.*
+
 
 object testObject{
     method iniciarPelea(){
@@ -11,7 +13,6 @@ object testObject{
     }
 }
 
-//mover esto a un archivo config
 object controles{
 
     var menuActual = null
@@ -24,6 +25,7 @@ object controles{
         keyboard.up().onPressDo({self._moverAnteriorOpcion()})
         keyboard.down().onPressDo({ self._moverSiguienteOpcion()})
         keyboard.enter().onPressDo({ self._seleccionarOpcionActual()})
+        keyboard.backspace().onPressDo({ self._volverMenuAnterior()})
     }
 
     method _moverAnteriorOpcion(){
@@ -52,11 +54,21 @@ object controles{
         }
         
     }
+
+    method _volverMenuAnterior(){
+        if(menuActual != null){
+            menuActual.volverMenuAnterior()
+        }else{
+            return
+        }
+        
+    }
     
 }
 
 object party{
     const miembros = [playerPrueba]
+    const property inventario = []
     //const menuPelea = new MenuBatalla(opciones = [atacar,magia,items,escapar])
     const menuPelea = new MenuBatalla()
 
