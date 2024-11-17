@@ -11,8 +11,8 @@ class Escenario {
   }
   method crearBordes(){
     self.crearLineaHaciaArriba(0, 0, game.height())
-    self.crearLineaHaciaDerecha(game.height(), 0, game.width())
-    self.crearLineaHaciaArriba(game.width(), 0, game.height())
+    self.crearLineaHaciaDerecha(game.height() - 1, 0, game.width())
+    self.crearLineaHaciaArriba(game.width() - 1, 0, game.height())
     self.crearLineaHaciaDerecha(0, 0, game.width())
   }
   method ponerParedes(posx,posy){    
