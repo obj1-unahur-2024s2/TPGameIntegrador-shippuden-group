@@ -1,17 +1,18 @@
 import wollok.game.*
+import bombas.*
 object bomberman{
     //si da el tiempo voy a hacerle que gire a donde se mueve
     var property image = "bombermanAbajo.png"
     var property position = game.center()
     var direccion = abajo
-	var bombasDisponibles = 2 // ver con cuantas empieza o tiene, o si aumenta si hay powerups
+	var bombasDisponibles = 5 // ver con cuantas empieza o tiene, o si aumenta si hay powerups
 
 	method bombasDisponibles() = bombasDisponibles
 
 	method ponerBomba(){
 		if(bombasDisponibles >= 1){
 			//game.addVisual(new Bomba())
-			console.println("Puse una bomba")
+			game.addVisual(new Bomba(position = self.position()))
 			bombasDisponibles -= 1
 		}
 

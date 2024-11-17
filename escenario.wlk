@@ -21,7 +21,7 @@ class Escenario {
   method renderizarNivel(){
     visuals.forEach({visual=>game.addVisual(visual)})
   }
-  
+
 }
 
 class Objeto{

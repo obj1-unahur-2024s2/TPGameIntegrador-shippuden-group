@@ -8,7 +8,7 @@ program juego {
     //game.boardGround(imagenes.campoDeBatalla())
     game.cellSize(50) //esto ya es por defecto
     game.height(10)
-    game.width(7)
+    game.width(10)
 
     controles.activarControles()
     nivel1.crearBordes()
