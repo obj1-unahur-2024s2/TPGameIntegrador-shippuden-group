@@ -15,7 +15,6 @@ object bomberman{
 			game.addVisual(new Bomba(position = self.position()))
 			bombasDisponibles -= 1
 		}
-
 	}
 
     method irArriba() {

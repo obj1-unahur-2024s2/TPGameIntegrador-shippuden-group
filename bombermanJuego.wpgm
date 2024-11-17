@@ -2,8 +2,7 @@ import wollok.game.*
 import config.*
 import niveles.*
 import bomberman.*
-import enemigo.*
-
+import escenario.*
 
 program juego {
     game.title("rpg")
@@ -11,15 +10,12 @@ program juego {
     game.cellSize(50) //esto ya es por defecto
     game.height(10)
     game.width(10)
-
+    game.addVisual(reloj)
     controles.activarControles()
     nivel1.crearBordes()
     //nivel1.ponerParedes(posx, posy)
     nivel1.renderizarNivel()
-    //enemigo
-    game.addVisual(valcom)
-    game.onTick(500, "movimiento", {valcom.moverse()})
-
+    
     game.addVisual(bomberman)
     game.start()
 }
