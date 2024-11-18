@@ -18,7 +18,7 @@ object bomberman{
 			//game.addVisual(new Bomba())
 			game.addVisual(new Bomba(position=self.position()))
 			bombasDisponibles -= 1
-			game.onTick(1000, "activarBomba", {bomba.relojActivado()})}
+			game.onTick(1000, "activar bomba", bomba.relojActivado())
 		}
 	}
 

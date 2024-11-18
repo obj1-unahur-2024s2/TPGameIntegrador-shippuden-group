@@ -56,7 +56,7 @@ class Explosion {
         if(tiempoDeExplacion == 0) {
             game.removeVisual(self)
             game.removeTickEvent("activarBomba")
-            tiempoDeExplocion=2 // debe volver a settearse en 2 este valor por que queda en 0 cuando termina la animacion
+            // debe volver a settearse en 2 este valor por que queda en 0 cuando termina la animacion
         }
     }
    
