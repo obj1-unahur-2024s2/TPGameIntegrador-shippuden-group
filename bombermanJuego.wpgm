@@ -3,6 +3,8 @@ import config.*
 import niveles.*
 import bomberman.*
 import escenario.*
+import ui.*
+
 
 program juego {
     //Configurar juego
@@ -12,8 +14,8 @@ program juego {
     game.width(10)
     controles.activarControles()
 
-    //game.addVisual(reloj) // para que el reloj este siempre visible, hay que hacer que el tablero no llegue hasta arriba de todo si no, lo taparia.
-
+    game.addVisual(contador)
+    game.addVisual(reloj) // para que el reloj este siempre visible, hay que hacer que el tablero no llegue hasta arriba de todo si no, lo taparia.
     //esto metodos despues tiene que estar en un metodo del nivel nivel.cargar() // //nivel1.ponerParedes(posx, posy)
 
     nivel1.crearBordes()

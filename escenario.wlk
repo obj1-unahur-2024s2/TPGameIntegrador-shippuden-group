@@ -34,14 +34,14 @@ class Pared inherits Objeto{
     override method puedeAtravesarse() = false
 }
 
-/*
+
 object reloj {
 	var tiempo = 0
-  var property position = game.at(6,8)
+  var property position = game.at(6,9)
 	method pasarTiempo() {
 		tiempo = tiempo + 1
 	}
-  method image()= "caja.png"
+  method image()= "reloj.png"
   method text()= "Tiempo " +  tiempo
 	method initialize(){
 		tiempo = 0
@@ -51,4 +51,3 @@ object reloj {
 		game.removeTickEvent("tiempo")
 	}
 }
-*/
