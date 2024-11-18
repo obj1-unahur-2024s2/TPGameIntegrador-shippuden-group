@@ -27,4 +27,4 @@ object reloj {
 	method detener(){
 		game.removeTickEvent("tiempo")
 	}
-}
+ }
