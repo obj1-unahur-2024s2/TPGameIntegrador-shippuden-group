@@ -11,6 +11,12 @@ object controles{
     }
 }
 
+object configuraciones{
+    method tiempoDeEplosionDeBombas() = 3
+    method duracionDeExplosion() = 2
+}
+
+
 class Direccion {
 	method siguiente(position)
 	method imagen()
