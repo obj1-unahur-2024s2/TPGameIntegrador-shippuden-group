@@ -27,8 +27,17 @@ class Escenario {
     
   }
 
+  method cargarBloques()
+
   method renderizarNivel(){
     visuals.forEach({visual=>game.addVisual(visual)})
+  }
+
+  method cargar(){
+    self.crearBordes()
+    self.ponerParedes()
+    self.cargarBloques()
+    self.renderizarNivel()
   }
 
 }

@@ -14,6 +14,10 @@ object controles{
 object configuraciones{
     method tiempoDeEplosionDeBombas() = 3
     method duracionDeExplosion() = 2
+
+    method generarNumeroRandom(){
+        return 0.randomUpTo(300).truncate(0)
+    }
 }
 
 

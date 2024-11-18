@@ -11,12 +11,8 @@ class ObjetoConCuentaRegresiva{
     method text() //esto es a modo de debug
 
     method initialize(){
-        numeroRandomParaElTick = self.generarNumeroRandom()
+        numeroRandomParaElTick = configuraciones.generarNumeroRandom()
         game.onTick(1000, "timer"+numeroRandomParaElTick, {self.descontarTiempo(1)})
-    }
-
-    method generarNumeroRandom(){
-        return 0.randomUpTo(300).truncate(0)
     }
 
     method descontarTiempo(segundos) {
