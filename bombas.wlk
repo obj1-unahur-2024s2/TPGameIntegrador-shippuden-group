@@ -23,7 +23,7 @@ class ObjetoConCuentaRegresiva{
         temporizador = 0.max(temporizador - segundos)
     }
 
-    method puedeTraspazarse() = false 
+    method puedeAtravesarse() = false 
 
     method removerObjeto() {
         game.removeTickEvent("timer"+numeroRandomParaElTick)// cuando explota remueve el tick y cuando pone lo activa
@@ -47,10 +47,21 @@ class Bomba inherits ObjetoConCuentaRegresiva(temporizador = configuraciones.tie
         console.println("Exploto!") //DEBUG
         bomberman.agregarBomba() 
         game.addVisual(new Explosion(position = self.position()))
+        //self.ondaExpansiva()
         self.removerObjeto()
     }
+    //method ondaExpansiva(){
+    //    const direcciones = [up,right,down,left]
+    //    direcciones.forEach({dir = direcciones.first() => if(self.position.dir(1).isEmpty()){
+    //        game.addVisual(new Explosion(position = self.position.dir.(1)))
+    //            }
+    //        }
+    //    )
+    //   
+	//}
 
-}
+    }   
+
 
 
 class Explosion inherits ObjetoConCuentaRegresiva(temporizador = configuraciones.duracionDeExplosion()){
@@ -64,5 +75,6 @@ class Explosion inherits ObjetoConCuentaRegresiva(temporizador = configuraciones
             self.removerObjeto()
         }
         super(segundos)
-    }   
+    }
+
 }
