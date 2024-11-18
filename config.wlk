@@ -10,3 +10,28 @@ object controles{
         /*game.whenCollideDo(raton, { elemento => elemento.interactuar()})*/
     }
 }
+
+class Direccion {
+	method siguiente(position)
+	method imagen()
+}
+
+object izquierda inherits Direccion { 
+	override method siguiente(position) = position.left(1) 
+	override method imagen() = "Izquierda"
+}
+
+object derecha inherits Direccion { 
+	override method siguiente(position) = position.right(1) 
+	override method imagen() = "Derecha"
+}
+
+object abajo inherits Direccion { 
+	override method siguiente(position) = position.down(1) 
+	override method imagen() = "Abajo"
+}
+
+object arriba inherits Direccion { 
+	override method siguiente(position) = position.up(1) 
+	override method imagen() = "Arriba"
+}

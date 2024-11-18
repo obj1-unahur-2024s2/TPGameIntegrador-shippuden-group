@@ -1,24 +1,24 @@
 import wollok.game.*
 import bombas.*
+import config.*
 object bomberman{
     //si da el tiempo voy a hacerle que gire a donde se mueve
     var property image = "bombermanAbajo.png"
     var property position = game.center()
     var direccion = abajo
-	var bombasDisponibles = 5 // ver con cuantas empieza o tiene, o si aumenta si hay powerups
+	var bombasDisponibles = 2 //ver si cuantas dejar como inicial
 
 	method bombasDisponibles() = bombasDisponibles
 
 	method agregarBomba() {
-	     bombasDisponibles = bombasDisponibles +1 // methodo que agrega a 1 bomba a la variable cuando ya exploto
+		console.println("Se ejecuto agregar bomba")
+	    bombasDisponibles += 1 // methodo que agrega a 1 bomba a la variable cuando ya exploto
 	}
 
 	method ponerBomba(){
 		if(bombasDisponibles >= 1){
-			//game.addVisual(new Bomba())
 			game.addVisual(new Bomba(position=self.position()))
 			bombasDisponibles -= 1
-			game.onTick(1000, "activar bomba", bomba.relojActivado())
 		}
 	}
 
@@ -57,27 +57,3 @@ object bomberman{
 	}
 }
 
-class Direccion {
-	method siguiente(position)
-	method imagen()
-}
-
-object izquierda inherits Direccion { 
-	override method siguiente(position) = position.left(1) 
-	override method imagen() = "Izquierda"
-}
-
-object derecha inherits Direccion { 
-	override method siguiente(position) = position.right(1) 
-	override method imagen() = "Derecha"
-}
-
-object abajo inherits Direccion { 
-	override method siguiente(position) = position.down(1) 
-	override method imagen() = "Abajo"
-}
-
-object arriba inherits Direccion { 
-	override method siguiente(position) = position.up(1) 
-	override method imagen() = "Arriba"
-}

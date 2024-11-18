@@ -1,5 +1,6 @@
 import wollok.game.*
 import bomberman.*
+import config.*
 
 object valcom {
   var property image = "valcom.png"
