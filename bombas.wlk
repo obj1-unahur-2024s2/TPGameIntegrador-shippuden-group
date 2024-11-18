@@ -1,70 +1,68 @@
 import wollok.game.*
 import bomberman.*
+import config.*
 
-class Bomba  {
+class ObjetoConCuentaRegresiva{
     var property position 
-    var tiempoDeExplosion = 3
     var numeroRandomParaElTick
+    var temporizador
 
-    method image() = "bomba1.png"
-    method text() = "tiempo: " + tiempoDeExplosion
+    method image()
+    method text() //esto es a modo de debug
 
     method initialize(){
         numeroRandomParaElTick = self.generarNumeroRandom()
-        game.onTick(1000, "activarBomba"+numeroRandomParaElTick, {self.descontarTiempo(1)})
+        game.onTick(1000, "timer"+numeroRandomParaElTick, {self.descontarTiempo(1)})
     }
 
     method generarNumeroRandom(){
         return 0.randomUpTo(300).truncate(0)
     }
 
+    method descontarTiempo(segundos) {
+        temporizador = 0.max(temporizador - segundos)
+    }
+
     method puedeTraspazarse() = false 
 
-    method descontarTiempo(segundos) {
-        tiempoDeExplosion = 0.max(tiempoDeExplosion - segundos)
-        self.explotar()
+    method removerObjeto() {
+        game.removeTickEvent("timer"+numeroRandomParaElTick)// cuando explota remueve el tick y cuando pone lo activa
+        game.removeVisual(self)
+    } 
+}
+class Bomba inherits ObjetoConCuentaRegresiva(temporizador = configuraciones.tiempoDeEplosionDeBombas()){
+
+    override method image() = "bomba1.png"
+    override method text() = "tiempo: " + temporizador //DEBUG
+
+    override method descontarTiempo(segundos) {
+        console.println("bomba: "+temporizador)
+        if(temporizador == 0){
+            self.explotar()
+        }
+        super(segundos)
     }
 
     method explotar(){
-        if(tiempoDeExplosion == 0){
-            console.println("Exploto!")
-            bomberman.agregarBomba() 
-            game.addVisual(new Explosion(position = self.position()))
-            self.removerBomba()
-        }
-        
-        
-        //tiempoDeExplosion=2 // el tiempo de explocion vuelve a settearse en 2
-    }
-
-    method removerBomba() {
-        game.removeTickEvent("activarBomba"+numeroRandomParaElTick)// cuando explota remueve el tick y cuando pone lo activa
-        game.removeVisual(self)
+        console.println("Exploto!") //DEBUG
+        bomberman.agregarBomba() 
+        game.addVisual(new Explosion(position = self.position()))
+        self.removerObjeto()
     }
 
 }
 
 
-class Explosion {
-    const property position 
-    var property tiempoDeExplosion = 2
-    method image() ="explosion.png"
+class Explosion inherits ObjetoConCuentaRegresiva(temporizador = configuraciones.duracionDeExplosion()){
 
-    method initialize(){
-        game.onTick(1000, "activarTimer", {self.relojActivado()})
-    }
+    override method image() ="explosion.png"
+    override method text() = "tiempo: " + temporizador //DEBUG
 
-    method relojActivado() {
-       tiempoDeExplosion = 0.max(tiempoDeExplosion - 1)
-       self.removerObjeto()
-    }
-
-    method removerObjeto(){
-        if(tiempoDeExplosion == 0) {
-            game.removeVisual(self)
-            game.removeTickEvent("activarBomba")
-            // debe volver a settearse en 2 este valor por que queda en 0 cuando termina la animacion
+    override method descontarTiempo(segundos){
+        console.println("bomba: "+temporizador)
+        if(temporizador == 0){
+            self.removerObjeto()
         }
-    }
-   
+        super(segundos)
+    }   
 }
