@@ -10,10 +10,10 @@ class Escenario {
     (origenY..origenY + _alto).forEach({n=>visuals.add(new Pared(position = game.at(origenX,n)))})
   }
   method crearBordes(){
-    self.crearLineaHaciaArriba(0, 0, game.height())
-    self.crearLineaHaciaDerecha(game.height() - 1, 0, game.width())
-    self.crearLineaHaciaArriba(game.width() - 1, 0, game.height())
-    self.crearLineaHaciaDerecha(0, 0, game.width())
+    self.crearLineaHaciaArriba(0, 0, game.height() - 2)
+    self.crearLineaHaciaDerecha(1, game.height() - 2, game.width() - 3)
+    self.crearLineaHaciaArriba(game.width() - 1, 0, game.height() - 2)
+    self.crearLineaHaciaDerecha(1, 0, game.width() - 3)
   }
   method ponerParedes(posx,posy){    
     (posx..posx+10).forEach((posy..posy + 7).forEach({x,y => if(x.even() and y.even()){visuals.add(new Pared(position = game.at(posx,posy)))}}))
@@ -30,7 +30,7 @@ class Objeto{
 }
 
 class Pared inherits Objeto{
-    const property image = "pared.png"
+    const property image = "pared2.png"
     override method puedeAtravesarse() = false
 }
 
