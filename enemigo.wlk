@@ -2,18 +2,40 @@ import wollok.game.*
 import bomberman.*
 import config.*
 
-object valcom {
-  var property image = "valcom.png"
-  var property position = game.at(4, 5)
+//despues pasar todo a enemigo
+class Enemigo{
+  var property position
+  const velocidad // este vamos a indicar cada cuanto se actualiza
+  const nombreImagenBase
+  const puedeAtravesarParedes
   const property direcciones = [izquierda,derecha,arriba,abajo]
-  var direccion = direcciones.anyOne()
+  var numeroRandomParaElTick
+  var property image
 
-  method moverse() {
-    const aleatorio = direcciones.anyOne()
-    const siguientePosicion = game.getObjectsIn(aleatorio.siguiente(position))
-    if(siguientePosicion.isEmpty()){
+  method initialize(){
+    image = nombreImagenBase
+    numeroRandomParaElTick = configuraciones.generarNumeroRandom()
+    game.onTick(velocidad, "movimientoEnemigo"+numeroRandomParaElTick, {self.moverse()})
+  }
+
+  method moverse(){
+        const aleatorio = direcciones.anyOne()
+        const siguientePosicion = game.getObjectsIn(aleatorio.siguiente(position))
+           if(self.puedeAtravesarParedes() or siguientePosicion.isEmpty()){
         position = aleatorio.siguiente(position)
-        //self.actualizarImagen(direccion.imagen())
+        self.actualizarImagen(aleatorio.imagen())
     }
   }
+
+  method puedeAtravesarParedes() = puedeAtravesarParedes
+
+  method actualizarImagen(direccionImagen){
+		const extension = ".png"
+		image = nombreImagenBase + direccionImagen + extension
+  }
+
+}
+
+class Valcom inherits Enemigo(velocidad = 1000, nombreImagenBase = "valcom", puedeAtravesarParedes = false){
+
 }

@@ -4,6 +4,7 @@ import niveles.*
 import bomberman.*
 import escenario.*
 import ui.*
+import enemigo.*
 
 
 program juego {
@@ -18,9 +19,8 @@ program juego {
     game.addVisual(reloj) // para que el reloj este siempre visible, hay que hacer que el tablero no llegue hasta arriba de todo si no, lo taparia.
     //esto metodos despues tiene que estar en un metodo del nivel nivel.cargar() // //nivel1.ponerParedes(posx, posy)
 
-    nivel1.crearBordes()
-    nivel1.ponerParedes()
-    nivel1.renderizarNivel()
+    nivel1.cargar()
+    game.addVisual(new Valcom(position = game.center()))
     game.addVisual(bomberman) // agregar a bomberman tambien tendria que estar dentro del nivel
 
     game.start()
