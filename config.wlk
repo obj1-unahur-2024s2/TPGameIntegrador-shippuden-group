@@ -6,10 +6,7 @@ object controles{
         keyboard.down().onPressDo({bomberman.irAbajo()})
         keyboard.left().onPressDo({bomberman.irIzquierda()})
         keyboard.right().onPressDo({bomberman.irDerecha()})
-        keyboard.space().onPressDo(
-            {bomberman.ponerBomba()
-            game.onTick(1000, "activarBomba", {bomba.relojActivado()})} )
-
-        //game.whenCollideDo(raton, { elemento => elemento.interactuar() })
+        keyboard.space().onPressDo({bomberman.ponerBomba()} )
+        /*game.whenCollideDo(raton, { elemento => elemento.interactuar()})*/
     }
 }

@@ -1,14 +1,13 @@
 import wollok.game.*
+import bomberman.*
 class Bomba  {
-    var property position
+    var property position 
     var property tiempoDeExplacion = 2
     var property estaActivada = false
     var property puedeTraspazarse = false 
 
-    /*
-    method initialize(){
-        game.onTick(1000, "activarBomba", {self.relojActivado()})
-    }*/
+    
+  
 
     method image() = "bomba1.png"
     //if(tiempoDeExplacion >=1){"descarga (1).png"}else{self.explotar()}
@@ -24,6 +23,8 @@ class Bomba  {
         //esto despues tendria que agarrar una bomba para cada punto
         game.addVisual(new Explosion(position = self.position()))
         game.removeVisual(self)
+        game.removeTickEvent("activarBomba")// cuando explota remueve el tick y cuando pone lo activa
+        tiempoDeExplacion=2 // el tiempo de explocion vuelve a settearse en 2
     }
 
     method removerBomba() {
@@ -31,15 +32,10 @@ class Bomba  {
             self.explotar()
             //game.removeTickEvent("activarBomba")
         }
-
+        bomberman.agregarBomba() 
     }
-    /*
-    method hacerDanio(unObjeto) {
-       game.removeTickEvent("activarBomba")
-
-       //unObjeto.recibirDanio(self.danio())
-    }
-    */
+  
+  
 }
 
 class Explosion {
@@ -60,6 +56,7 @@ class Explosion {
         if(tiempoDeExplacion == 0) {
             game.removeVisual(self)
             game.removeTickEvent("activarBomba")
+            tiempoDeExplocion=2 // debe volver a settearse en 2 este valor por que queda en 0 cuando termina la animacion
         }
     }
    

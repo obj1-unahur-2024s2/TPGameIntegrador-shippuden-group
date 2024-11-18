@@ -9,11 +9,16 @@ object bomberman{
 
 	method bombasDisponibles() = bombasDisponibles
 
+	method agregarBomba() {
+	     bombasDisponibles = bombasDisponibles +1 // methodo que agrega a 1 bomba a la variable cuando ya exploto
+	}
+
 	method ponerBomba(){
 		if(bombasDisponibles >= 1){
 			//game.addVisual(new Bomba())
-			game.addVisual(new Bomba(position = self.position()))
+			game.addVisual(new Bomba(position=self.position()))
 			bombasDisponibles -= 1
+			game.onTick(1000, "activarBomba", {bomba.relojActivado()})}
 		}
 	}
 

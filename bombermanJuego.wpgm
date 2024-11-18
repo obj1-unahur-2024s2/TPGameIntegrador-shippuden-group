@@ -15,7 +15,6 @@ program juego {
     nivel1.crearBordes()
     //nivel1.ponerParedes(posx, posy)
     nivel1.renderizarNivel()
-    
     game.addVisual(bomberman)
     game.start()
 }
