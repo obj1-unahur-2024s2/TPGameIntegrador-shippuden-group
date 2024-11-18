@@ -6,18 +6,27 @@ class Escenario {
   method crearLineaHaciaDerecha(origenX,origenY,_ancho){
     (origenX..origenX + _ancho).forEach({n=>visuals.add(new Pared(position = game.at(n,origenY)))})
   }
+
   method crearLineaHaciaArriba(origenX,origenY,_alto){
     (origenY..origenY + _alto).forEach({n=>visuals.add(new Pared(position = game.at(origenX,n)))})
   }
+
   method crearBordes(){
     self.crearLineaHaciaArriba(0, 0, game.height() - 2)
     self.crearLineaHaciaDerecha(1, game.height() - 2, game.width() - 3)
     self.crearLineaHaciaArriba(game.width() - 1, 0, game.height() - 2)
     self.crearLineaHaciaDerecha(1, 0, game.width() - 3)
   }
-  method ponerParedes(posx,posy){    
-    (posx..posx+10).forEach((posy..posy + 7).forEach({x,y => if(x.even() and y.even()){visuals.add(new Pared(position = game.at(posx,posy)))}}))
+
+  method ponerParedes(){
+    (1 .. game.height() - 3).forEach({
+      y => (1 .. game.width() - 2).forEach({
+          x => if (x.even() and y.even()){visuals.add(new Pared(position = game.at(x,y)))}
+        })
+    })
+    
   }
+
   method renderizarNivel(){
     visuals.forEach({visual=>game.addVisual(visual)})
   }
@@ -26,13 +35,19 @@ class Escenario {
 
 class Objeto{
     const property position
-    method puedeAtravesarse() = true
+    method puedeAtravesarse() = false
 }
 
 class Pared inherits Objeto{
     const property image = "pared2.png"
-    override method puedeAtravesarse() = false
+    //verride method puedeAtravesarse() = false
 }
+
+class Bloque inherits Objeto{
+    const property image = "bloque.png"
+}
+
+
 
 
 

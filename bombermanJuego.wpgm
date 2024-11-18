@@ -11,7 +11,7 @@ program juego {
     game.title("rpg")
     game.cellSize(50) //esto ya es por defecto
     game.height(10)
-    game.width(10)
+    game.width(15)
     controles.activarControles()
 
     game.addVisual(contador)
@@ -19,6 +19,7 @@ program juego {
     //esto metodos despues tiene que estar en un metodo del nivel nivel.cargar() // //nivel1.ponerParedes(posx, posy)
 
     nivel1.crearBordes()
+    nivel1.ponerParedes()
     nivel1.renderizarNivel()
     game.addVisual(bomberman) // agregar a bomberman tambien tendria que estar dentro del nivel
 
