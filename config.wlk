@@ -14,7 +14,7 @@ object configuraciones{
     method tiempoDeEplosionDeBombas() = 2
     method duracionDeExplosion() = 1
 
-    method velocidadFantasma() = 0.4
+    method velocidadFantasma() = 1
     method velocidadValcom() = 0.8
 
     method generarNumeroRandom(){

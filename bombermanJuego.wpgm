@@ -16,7 +16,8 @@ program juego {
     game.boardGround("fondo.jpg")
     controles.activarControles()
 
-    nivel1.cargar()
+    //nivel1.cargar()
+    nivelPrueba.cargar()
     ui.cargar()
 
 
