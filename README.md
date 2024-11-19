@@ -2,7 +2,7 @@
 
 ## Equipo de desarrollo
 
-- Facundo Sordi
+- Federico Sordi
 - Lautaro Farias
 - Lautaro Milrad
 - Jonathan Puyol
