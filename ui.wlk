@@ -1,30 +1,56 @@
 import bomberman.*
 
-object contador  {
+object ui{
+	method cargar(){
+		game.addVisual(contadorImagen)
+    	game.addVisual(contadorLabel) 
+    	game.addVisual(relojImagen) 
+		game.addVisual(relojLabel)
+	}
+}
 
-    var position =  game.at(2,9)
+class Label{
+	method textColor() = "FFFFFF"
+}
 
+object contadorImagen {
+    const position =  game.at(1,9)
     method image() ="contadorBomba.png" 
     method position() = position
+}
 
-    method text() ="bombas" + bomberman.bombasDisponibles() 
-  
+object contadorLabel inherits Label{
+	method position() = game.at(2,game.height() - 1)
+	method text() = "" + bomberman.bombasDisponibles() 
 }
 
 
-object reloj {
+object relojImagen {
+	method position() = game.at(game.width() - 3, game.height() - 1)
+	method image() = "reloj.png"
+
+}
+
+object relojLabel inherits Label{
 	var tiempo = 0
-  var property position = game.at(6,9)
-	method pasarTiempo() {
-		tiempo = tiempo + 1
-	}
-  method image()= "reloj.png"
-  method text()= "Tiempo " +  tiempo
+
+	method position() = game.at(game.width() - 2, game.height() - 1)
 	method initialize(){
 		tiempo = 0
 		game.onTick(1000,"tiempo",{self.pasarTiempo()})
 	}
+
+	method text() = ""+tiempo
+
+	method pasarTiempo() {
+		tiempo = tiempo + 1
+	}
+
 	method detener(){
 		game.removeTickEvent("tiempo")
 	}
- }
+
+	method reiniciar(){
+		tiempo = 0
+	}
+}

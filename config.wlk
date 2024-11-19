@@ -7,10 +7,7 @@ object controles{
         keyboard.left().onPressDo({bomberman.irIzquierda()})
         keyboard.right().onPressDo({bomberman.irDerecha()})
         keyboard.space().onPressDo({bomberman.ponerBomba()} )
-        /*game.whenCollideDo(raton, { elemento => elemento.interactuar()})*/
     }
-
-
 }
 
 object configuraciones{
@@ -28,7 +25,6 @@ object configuraciones{
             }   
         }) 
 
-        //game.whenCollideDo(new Valcom(), {elemento => elemento.})
     }
     //no supe hacerlo mejor esto
     method esUnEnemigo(enemigo){

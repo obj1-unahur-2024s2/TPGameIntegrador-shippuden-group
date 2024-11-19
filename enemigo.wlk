@@ -2,7 +2,6 @@ import wollok.game.*
 import bomberman.*
 import config.*
 
-//despues pasar todo a enemigo
 class Enemigo{
   var property position
   const velocidad // este vamos a indicar cada cuanto se actualiza
@@ -17,8 +16,9 @@ class Enemigo{
     image = nombre+"Abajo.png"
     numeroRandomParaElTick = configuraciones.generarNumeroRandom()
     game.onTick(velocidad, "movimientoEnemigo"+numeroRandomParaElTick, {self.moverse()})
-    //Hice esto para que no se creen muchos onTick con el mismo nombre ya que traia problemas.
-    //despues vi que existe el schedule para que se ejecute tal accion despues de cierto tiempo
+    //hice esto para que haya un onTick independiente por enemigo. Se podria haber usado uno global y que llame a una lista
+    //de enemigos y haga un forEach{enemigo => enemigo.moverse()} para modificar si se puede.
+    //a si tendriamos un solo onTick que controle todo
     self.detectarExplosiones()
   }
 
@@ -37,6 +37,7 @@ class Enemigo{
   }
   
   method animacionMorir(){
+    //por ahora solo cambia de sprite a uno muerto, ver si hacemos animacion
     game.addVisual(new EnemigoMuerto(nombre = nombre, position = self.position()))
     game.removeVisual(self)
   }
@@ -63,7 +64,11 @@ class Enemigo{
 
 }
 
-class Valcom inherits Enemigo(velocidad = 1000, nombre = "valcom", puedeAtravesarParedes = false){
+class Valcom inherits Enemigo(velocidad = 700, nombre = "valcom", puedeAtravesarParedes = false){
+
+}
+
+class Enemigo2 inherits Enemigo(velocidad = 400, nombre = "valcom", puedeAtravesarParedes = false){
 
 }
 

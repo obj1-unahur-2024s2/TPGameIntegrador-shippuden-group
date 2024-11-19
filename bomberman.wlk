@@ -12,7 +12,7 @@ object bomberman{
 	method bombasDisponibles() = bombasDisponibles
 
 	method agregarBomba() {
-	    bombasDisponibles += 1 // methodo que agrega a 1 bomba a la variable cuando ya exploto
+	    bombasDisponibles += 1
 	}
 
 	method ponerBomba(){
