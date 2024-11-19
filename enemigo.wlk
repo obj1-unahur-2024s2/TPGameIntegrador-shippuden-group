@@ -30,6 +30,8 @@ class Enemigo{
     })
   }
 
+  method haceDanio() = true
+
   method morir(){
     vivo = false
     self.animacionMorir()
@@ -69,7 +71,31 @@ class Valcom inherits Enemigo(velocidad = configuraciones.velocidadValcom(), nom
 }
 
 class Fantasma inherits Enemigo(velocidad = configuraciones.velocidadFantasma(), nombre = "fantasma", puedeAtravesarBloques = false){
-//este enemigo estaria bueno que te pueda seguir y que pueda atravesar bloques
+  override method moverse(){
+    const bombermanX = bomberman.position().x()
+    const bombermanY = bomberman.position().y()
+
+    var x //= if (bombermanX > position.x()) {derecha.siguiente(position).x()} else {izquierda.siguiente(position).x()}
+    var y //= if (bombermanY > position.y()) {arriba.siguiente(position).y()} else {abajo.siguiente(position).y()} {}
+
+    if(bombermanX > position.x()){
+      x = derecha.siguiente(position).x()
+    }else if(bombermanX == position.x()){
+      x = position.x()
+    }else{
+      x = izquierda.siguiente(position).x()
+    }
+
+    if(bombermanY > position.y()){
+      y = arriba.siguiente(position).y()
+    }else if(bombermanY == position.y()){
+      y = position.y()
+    }else{
+      y = abajo.siguiente(position).y()
+    }
+
+    position = game.at(x,y)
+  }
 }
 
 class EnemigoMuerto{

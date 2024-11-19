@@ -17,6 +17,7 @@ program juego {
     controles.activarControles()
 
     nivel1.cargar()
+    //nivelPrueba.cargar()
     ui.cargar()
 
 

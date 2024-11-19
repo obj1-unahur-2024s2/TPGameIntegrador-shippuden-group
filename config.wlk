@@ -11,10 +11,10 @@ object controles{
 }
 
 object configuraciones{
-    method tiempoDeEplosionDeBombas() = 2
+    method tiempoDeEplosionDeBombas() = 1.5
     method duracionDeExplosion() = 1
 
-    method velocidadFantasma() = 0.4
+    method velocidadFantasma() = 2
     method velocidadValcom() = 0.8
 
     method generarNumeroRandom(){
@@ -23,16 +23,21 @@ object configuraciones{
 
     method activarColisiones(){
         game.whenCollideDo(bomberman, {elemento => 
+            /*
             if (elemento.className() == "bombas.Explosion" || self.esUnEnemigo(elemento)){
                 bomberman.morir()
-            }   
+            }   */
+            if (elemento.haceDanio()){
+                bomberman.morir()
+            }
         }) 
 
     }
+    /*
     //no supe hacerlo mejor esto
     method esUnEnemigo(enemigo){
         return enemigo.className() == "enemigo.Valcom" || enemigo.className() == "enemigo.Fantasma" // aca hay quje agregar los nuevos enemigos que hagamos
-    }
+    }*/
 }
 
 

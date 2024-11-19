@@ -17,6 +17,8 @@ class ObjetoConCuentaRegresiva{
     method removerObjeto(){
         game.removeVisual(self)
     }
+
+    method haceDanio()
 }
 class Bomba inherits ObjetoConCuentaRegresiva(temporizador = configuraciones.tiempoDeEplosionDeBombas()){
 
@@ -32,7 +34,8 @@ class Bomba inherits ObjetoConCuentaRegresiva(temporizador = configuraciones.tie
         self.crearOndaExpansiva()
     }
 
- 
+    override method haceDanio() = false
+
     //este metodo necesita refactorisarse urgemtente
     method crearOndaExpansiva(){
         const direcciones = [arriba,abajo,izquierda,derecha]
@@ -90,4 +93,5 @@ class Explosion inherits ObjetoConCuentaRegresiva(temporizador = configuraciones
     const imagen
     override method image() = imagen
     override method puedeAtravesarse() = true
+    override method haceDanio() = true
 }
