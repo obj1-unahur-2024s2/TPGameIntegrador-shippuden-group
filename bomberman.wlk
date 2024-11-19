@@ -9,9 +9,6 @@ object bomberman{
 	var bombasDisponibles = 2 //ver si cuantas dejar como inicial
 	var estaVivo = true
 
-	method text() = ""+position
-  	method textColor() = "FF0000"
-
 	method bombasDisponibles() = bombasDisponibles
 
 	method agregarBomba() {

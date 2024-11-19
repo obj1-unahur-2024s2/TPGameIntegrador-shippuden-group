@@ -32,11 +32,11 @@ object nivel1 inherits Escenario(posicionInicial = game.at(1,7)){
     }
 
     override method cargarEnemigos(){
-        visuals.add(new Fantasma(position = game.at(2,1)))
-        visuals.add(new Fantasma(position = game.at(5,3)))
         visuals.add(new Fantasma(position = game.at(11,5)))
-        visuals.add(new Valcom(position = game.at(11,1)))
+        visuals.add(new Valcom(position = game.at(2,1)))
+        visuals.add(new Valcom(position = game.at(5,3)))
         visuals.add(new Valcom(position = game.at(9,7)))
+        visuals.add(new Valcom(position = game.at(11,1)))
     }
 }
 

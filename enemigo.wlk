@@ -30,6 +30,8 @@ class Enemigo{
     })
   }
 
+  method haceDanio() = true
+
   method morir(){
     vivo = false
     self.animacionMorir()
@@ -69,8 +71,6 @@ class Valcom inherits Enemigo(velocidad = configuraciones.velocidadValcom(), nom
 }
 
 class Fantasma inherits Enemigo(velocidad = configuraciones.velocidadFantasma(), nombre = "fantasma", puedeAtravesarBloques = false){
-  method text() = ""+position
-  method textColor() = "FF0000"
   override method moverse(){
     const bombermanX = bomberman.position().x()
     const bombermanY = bomberman.position().y()
@@ -93,8 +93,6 @@ class Fantasma inherits Enemigo(velocidad = configuraciones.velocidadFantasma(),
     }else{
       y = abajo.siguiente(position).y()
     }
-
-
 
     position = game.at(x,y)
   }
