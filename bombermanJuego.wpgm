@@ -13,14 +13,15 @@ program juego {
     game.cellSize(50) //esto ya es por defecto
     game.height(10)
     game.width(15)
+    game.boardGround("fondo.jpg")
     controles.activarControles()
 
-    game.addVisual(contador)
-    game.addVisual(reloj) // para que el reloj este siempre visible, hay que hacer que el tablero no llegue hasta arriba de todo si no, lo taparia.
-    //esto metodos despues tiene que estar en un metodo del nivel nivel.cargar() // //nivel1.ponerParedes(posx, posy)
-
     nivel1.cargar()
+    ui.cargar() // ver si lo ponemos dentro del nivel
+
     game.addVisual(new Valcom(position = game.center()))
+    game.addVisual(new Enemigo2(position = game.center()))
+
     game.addVisual(bomberman) // agregar a bomberman tambien tendria que estar dentro del nivel
 
     configuraciones.activarColisiones()

@@ -4,50 +4,39 @@ import config.*
 
 class ObjetoConCuentaRegresiva{
     var property position 
-    var numeroRandomParaElTick
-    var temporizador
+    const temporizador
 
     method image()
-    //method text() //esto es a modo de debug
 
     method initialize(){
-        numeroRandomParaElTick = configuraciones.generarNumeroRandom()
-        game.onTick(1000, "timer"+numeroRandomParaElTick, {self.descontarTiempo(1)})
-    }
-
-    method descontarTiempo(segundos) {
-        temporizador = 0.max(temporizador - segundos)
+        game.schedule(temporizador * 1000, {self.removerObjeto()})
     }
 
     method puedeAtravesarse() = false 
 
-    method removerObjeto() {
-        game.removeTickEvent("timer"+numeroRandomParaElTick)// cuando explota remueve el tick y cuando pone lo activa
+    method removerObjeto(){
         game.removeVisual(self)
-    } 
+    }
 }
 class Bomba inherits ObjetoConCuentaRegresiva(temporizador = configuraciones.tiempoDeEplosionDeBombas()){
 
     override method image() = "bomba1.png"
-    //override method text() = "tiempo: " + temporizador //DEBUG
 
-    override method descontarTiempo(segundos) {
-        if(temporizador == 0){
-            self.explotar()
-        }
-        super(segundos)
+    override method removerObjeto(){
+        self.explotar()
+        super()
     }
 
     method explotar(){
         bomberman.agregarBomba() 
-        game.addVisual(new Explosion(imagen = "explosionCentro.png", position = self.position()))
-        self.ondaExpansiva()
-        self.removerObjeto()
+        self.crearOndaExpansiva()
     }
 
     //Cosa para quizas cambiar si terminamos y hay tiempo.
     //Ver si podemos pedirle
-    method ondaExpansiva(){
+    method crearOndaExpansiva(){
+        game.addVisual(new Explosion(imagen = "explosionCentro.png", position = self.position()))
+        
         if(self.noHayParedhacia(self.position().up(1))){
             game.addVisual(new Explosion(imagen = "explosionArriba.png", position = self.position().up(1)))
         }
@@ -73,19 +62,7 @@ class Bomba inherits ObjetoConCuentaRegresiva(temporizador = configuraciones.tie
 
 
 class Explosion inherits ObjetoConCuentaRegresiva(temporizador = configuraciones.duracionDeExplosion()){
-
     const imagen
-
     override method image() = imagen
-    //override method text() = "tiempo: " + temporizador //DEBUG
-
-    override method descontarTiempo(segundos){
-        if(temporizador == 0){
-            self.removerObjeto()
-        }
-        super(segundos)
-    }
-
     override method puedeAtravesarse() = true
-
 }
