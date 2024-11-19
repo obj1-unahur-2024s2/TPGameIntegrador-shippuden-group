@@ -7,6 +7,7 @@ object bomberman{
     var property position = game.at(1,1)
     var direccion = abajo
 	var bombasDisponibles = 2 //ver si cuantas dejar como inicial
+	var estaVivo = true
 
 	method bombasDisponibles() = bombasDisponibles
 
@@ -50,6 +51,10 @@ object bomberman{
         }
 	}
 
+	method puedeMoverseHacia(siguientePosicion){
+		return estaVivo and (siguientePosicion.isEmpty() or siguientePosicion.first().puedeAtravesarse())
+	}
+
 	method actualizarImagen(direccionImagen){
 		const baseImagen = "bomberman"
 		const extension = ".png"
@@ -57,10 +62,13 @@ object bomberman{
 	}
 
 	method morir(){
+		estaVivo = false
 		self.mostrarAnimacionDeMuerte()
 		game.schedule(1000, {game.stop()})
 	}
 
+	//hice esto de otro objeto, porque no supe como ponerlo delante del tablero de nuevo
+	//trate con removeself y addself pero no me funcionaba, creeria que despues de hacer el remove no se ejecuta lo demas
 	method mostrarAnimacionDeMuerte(){
 		bombermanMuerto.position(self.position())
 		game.addVisual(bombermanMuerto)
