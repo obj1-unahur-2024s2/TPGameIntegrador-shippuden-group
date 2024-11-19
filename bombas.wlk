@@ -43,19 +43,23 @@ class Bomba inherits ObjetoConCuentaRegresiva(temporizador = configuraciones.tie
         console.println("Exploto!") //DEBUG
         bomberman.agregarBomba() 
         game.addVisual(new Explosion(position = self.position()))
-        //self.ondaExpansiva()
+        self.ondaExpansiva()
         self.removerObjeto()
     }
-    //method ondaExpansiva(){
-    //    const direcciones = [up,right,down,left]
-    //    direcciones.forEach({dir = direcciones.first() => if(self.position.dir(1).isEmpty()){
-    //        game.addVisual(new Explosion(position = self.position.dir.(1)))
-    //            }
-    //        }
-    //    )
-    //   
-	//}
-
+    method ondaExpansiva(){
+        if(game.getObjectsIn(self.position().up(1)).isEmpty()){
+            game.addVisual(new Explosion(position = self.position().up(1)))
+        }
+        if(game.getObjectsIn(self.position().right(1)).isEmpty()){
+            game.addVisual(new Explosion(position = self.position().right(1)))
+        }
+        if(game.getObjectsIn(self.position().down(1)).isEmpty()){
+            game.addVisual(new Explosion(position = self.position().down(1)))
+        }
+        if(game.getObjectsIn(self.position().left(1)).isEmpty()){
+            game.addVisual(new Explosion(position = self.position().left(1)))
+        }
+    }
     }   
 
 
