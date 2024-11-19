@@ -8,7 +8,7 @@ class ObjetoConCuentaRegresiva{
     var temporizador
 
     method image()
-    method text() //esto es a modo de debug
+    //method text() //esto es a modo de debug
 
     method initialize(){
         numeroRandomParaElTick = configuraciones.generarNumeroRandom()
@@ -29,7 +29,7 @@ class ObjetoConCuentaRegresiva{
 class Bomba inherits ObjetoConCuentaRegresiva(temporizador = configuraciones.tiempoDeEplosionDeBombas()){
 
     override method image() = "bomba1.png"
-    override method text() = "tiempo: " + temporizador //DEBUG
+    //override method text() = "tiempo: " + temporizador //DEBUG
 
     override method descontarTiempo(segundos) {
         if(temporizador == 0){
@@ -77,7 +77,7 @@ class Explosion inherits ObjetoConCuentaRegresiva(temporizador = configuraciones
     const imagen
 
     override method image() = imagen
-    override method text() = "tiempo: " + temporizador //DEBUG
+    //override method text() = "tiempo: " + temporizador //DEBUG
 
     override method descontarTiempo(segundos){
         if(temporizador == 0){

@@ -14,8 +14,8 @@ object controles{
 }
 
 object configuraciones{
-    method tiempoDeEplosionDeBombas() = 3
-    method duracionDeExplosion() = 2
+    method tiempoDeEplosionDeBombas() = 2
+    method duracionDeExplosion() = 1
 
     method generarNumeroRandom(){
         return 0.randomUpTo(300).truncate(0)
@@ -23,11 +23,12 @@ object configuraciones{
 
     method activarColisiones(){
         game.whenCollideDo(bomberman, {elemento => 
-            console.println(elemento.className())
             if (elemento.className() == "bombas.Explosion" || self.esUnEnemigo(elemento)){
                 bomberman.morir()
             }   
         }) 
+
+        //game.whenCollideDo(new Valcom(), {elemento => elemento.})
     }
     //no supe hacerlo mejor esto
     method esUnEnemigo(enemigo){
