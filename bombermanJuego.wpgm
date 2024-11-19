@@ -17,15 +17,12 @@ program juego {
     controles.activarControles()
 
     nivel1.cargar()
-    ui.cargar() // ver si lo ponemos dentro del nivel
+    ui.cargar()
 
-    game.addVisual(new Valcom(position = game.center()))
-    game.addVisual(new Fantasma(position = game.center()))
 
-    game.addVisual(bomberman) // agregar a bomberman tambien tendria que estar dentro del nivel
+     // agregar a bomberman tambien tendria que estar dentro del nivel
 
     configuraciones.activarColisiones()
 
     game.start()
 }
-

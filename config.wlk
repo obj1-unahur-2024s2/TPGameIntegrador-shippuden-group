@@ -14,6 +14,9 @@ object configuraciones{
     method tiempoDeEplosionDeBombas() = 2
     method duracionDeExplosion() = 1
 
+    method velocidadFantasma() = 0.4
+    method velocidadValcom() = 0.8
+
     method generarNumeroRandom(){
         return 0.randomUpTo(300).truncate(0)
     }
@@ -28,7 +31,7 @@ object configuraciones{
     }
     //no supe hacerlo mejor esto
     method esUnEnemigo(enemigo){
-        return enemigo.className() == "enemigo.Valcom" // aca hay quje agregar los nuevos enemigos que hagamos
+        return enemigo.className() == "enemigo.Valcom" || enemigo.className() == "enemigo.Fantasma" // aca hay quje agregar los nuevos enemigos que hagamos
     }
 }
 

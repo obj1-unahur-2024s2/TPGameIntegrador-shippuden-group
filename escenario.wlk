@@ -1,7 +1,9 @@
 import wollok.game.*
+import bomberman.*
 
 class Escenario {
   const visuals=[]
+  const posicionInicial
 
   method crearLineaHaciaDerecha(origenX,origenY,_ancho){
     (origenX..origenX + _ancho).forEach({n=>visuals.add(new Pared(position = game.at(n,origenY)))})
@@ -28,15 +30,19 @@ class Escenario {
   }
 
   method cargarBloques()
+  method cargarEnemigos()
 
   method renderizarNivel(){
     visuals.forEach({visual=>game.addVisual(visual)})
   }
 
   method cargar(){
+    bomberman.position(posicionInicial)
+    game.addVisual(bomberman)
     self.crearBordes()
     self.ponerParedes()
     self.cargarBloques()
+    self.cargarEnemigos()
     self.renderizarNivel()
   }
 

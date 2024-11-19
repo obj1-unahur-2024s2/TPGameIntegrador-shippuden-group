@@ -15,7 +15,7 @@ class Enemigo{
   method initialize(){
     image = nombre+"Abajo.png"
     numeroRandomParaElTick = configuraciones.generarNumeroRandom()
-    game.onTick(velocidad, "movimientoEnemigo"+numeroRandomParaElTick, {self.moverse()})
+    game.onTick(velocidad * 1000, "movimientoEnemigo"+numeroRandomParaElTick, {self.moverse()})
     //hice esto para que haya un onTick independiente por enemigo. Se podria haber usado uno global y que llame a una lista
     //de enemigos y haga un forEach{enemigo => enemigo.moverse()} para modificar si se puede.
     //a si tendriamos un solo onTick que controle todo
@@ -64,11 +64,11 @@ class Enemigo{
 
 }
 
-class Valcom inherits Enemigo(velocidad = 700, nombre = "valcom", puedeAtravesarBloques = false){
+class Valcom inherits Enemigo(velocidad = configuraciones.velocidadValcom(), nombre = "valcom", puedeAtravesarBloques = false){
 
 }
 
-class Fantasma inherits Enemigo(velocidad = 1000, nombre = "fantasma", puedeAtravesarBloques = false){
+class Fantasma inherits Enemigo(velocidad = configuraciones.velocidadFantasma(), nombre = "fantasma", puedeAtravesarBloques = false){
 //este enemigo estaria bueno que te pueda seguir y que pueda atravesar bloques
 }
 
