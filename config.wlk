@@ -9,6 +9,8 @@ object controles{
         keyboard.space().onPressDo({bomberman.ponerBomba()} )
         /*game.whenCollideDo(raton, { elemento => elemento.interactuar()})*/
     }
+
+
 }
 
 object configuraciones{
@@ -17,6 +19,19 @@ object configuraciones{
 
     method generarNumeroRandom(){
         return 0.randomUpTo(300).truncate(0)
+    }
+
+    method activarColisiones(){
+        game.whenCollideDo(bomberman, {elemento => 
+            console.println(elemento.className())
+            if (elemento.className() == "bombas.Explosion" || self.esUnEnemigo(elemento)){
+                bomberman.morir()
+            }   
+        }) 
+    }
+    //no supe hacerlo mejor esto
+    method esUnEnemigo(enemigo){
+        return enemigo.className() == "enemigo.Valcom" // aca hay quje agregar los nuevos enemigos que hagamos
     }
 }
 

@@ -18,6 +18,8 @@ class Enemigo{
     game.onTick(velocidad, "movimientoEnemigo"+numeroRandomParaElTick, {self.moverse()})
   }
 
+  method puedeAtravesarse() = true
+
   method moverse(){
         const aleatorio = direcciones.anyOne()
         const siguientePosicion = game.getObjectsIn(aleatorio.siguiente(position))
