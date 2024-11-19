@@ -23,6 +23,8 @@ program juego {
     game.addVisual(new Valcom(position = game.center()))
     game.addVisual(bomberman) // agregar a bomberman tambien tendria que estar dentro del nivel
 
+    configuraciones.activarColisiones()
+
     game.start()
 }
 
