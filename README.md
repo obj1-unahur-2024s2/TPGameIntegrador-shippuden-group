@@ -18,11 +18,11 @@ Reglas:
 Hay que encontrar la salida destruyendo bloques con las bombas para pasar al siguiente nivel. Cuidado con los enemigos y tus propias explosiones!
 
 Botones:
-w/flecha arriba -> Moverse hacia arriba
-a/flecha izquierda -> Moverse hacia la izquierda
-s/flecha abajo -> Moverse hacia abajo
-d/flecha derecha -> moverse hacia la derecha
-spacebar -> poner bombas
+- w/flecha arriba -> Moverse hacia arriba
+- a/flecha izquierda -> Moverse hacia la izquierda
+- s/flecha abajo -> Moverse hacia abajo
+- d/flecha derecha -> moverse hacia la derecha
+- spacebar -> poner bombas
 
 
 ## Otros
