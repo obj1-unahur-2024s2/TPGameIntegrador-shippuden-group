@@ -2,15 +2,16 @@
 
 ## Equipo de desarrollo
 
-- Facundo Sordi
+- Federico Sordi
 - Lautaro Farias
 - Lautaro Milrad
 - Jonathan Puyol
 - Nahuel Montero
 
 ## Capturas
+<img src="screenshot1.jpg" width="500px" />
+<img src="screenshot2.jpg" width="500px" />
 
-(agregar)
 
 ## Reglas de Juego / Instrucciones
 
@@ -29,4 +30,4 @@ Botones:
 
 - POO I - UNAHUR
 - Versión de wollok: 4.0.0
-- Una vez terminado, no tenemos problemas en que el repositorio sea público (confirmar esto equipo!)
+- Una vez terminado, no tenemos problemas en que el repositorio sea público
