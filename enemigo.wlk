@@ -6,7 +6,7 @@ class Enemigo{
   var property position
   const velocidad // este vamos a indicar cada cuanto se actualiza
   const nombre
-  const puedeAtravesarParedes
+  const puedeAtravesarBloques
   const property direcciones = [izquierda,derecha,arriba,abajo]
   var numeroRandomParaElTick
   var property image
@@ -49,13 +49,13 @@ class Enemigo{
   method moverse(){
         const aleatorio = direcciones.anyOne()
         const siguientePosicion = game.getObjectsIn(aleatorio.siguiente(position))
-           if(self.estaVivo() and (self.puedeAtravesarParedes() or siguientePosicion.isEmpty())){
+           if(self.estaVivo() and (self.puedeAtravesarBloques() or siguientePosicion.isEmpty())){
         position = aleatorio.siguiente(position)
         self.actualizarImagen(aleatorio.imagen())
     }
   }
 
-  method puedeAtravesarParedes() = puedeAtravesarParedes
+  method puedeAtravesarBloques() = puedeAtravesarBloques
 
   method actualizarImagen(direccionImagen){
 		const extension = ".png"
@@ -64,12 +64,12 @@ class Enemigo{
 
 }
 
-class Valcom inherits Enemigo(velocidad = 700, nombre = "valcom", puedeAtravesarParedes = false){
+class Valcom inherits Enemigo(velocidad = 700, nombre = "valcom", puedeAtravesarBloques = false){
 
 }
 
-class Enemigo2 inherits Enemigo(velocidad = 400, nombre = "valcom", puedeAtravesarParedes = false){
-
+class Fantasma inherits Enemigo(velocidad = 1000, nombre = "fantasma", puedeAtravesarBloques = false){
+//este enemigo estaria bueno que te pueda seguir y que pueda atravesar bloques
 }
 
 class EnemigoMuerto{

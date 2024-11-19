@@ -54,8 +54,11 @@ class Pared inherits Objeto{
 
 class Bloque inherits Objeto{
     const property image = "bloque.png"
-}
 
+    method destruir(){
+      game.removeVisual(self)
+    }
+}
 
 
 
