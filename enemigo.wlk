@@ -22,6 +22,8 @@ class Enemigo{
     self.detectarExplosiones()
   }
 
+  method vivo() = vivo
+
   method detectarExplosiones(){
     game.whenCollideDo(self,{ elemento => 
       if(elemento.className() == "bombas.Explosion"){
@@ -36,6 +38,7 @@ class Enemigo{
     vivo = false
     self.animacionMorir()
     game.schedule(1000, {game.removeVisual(self)})
+    configuraciones.pasarNivel()
   }
   
   method animacionMorir(){
@@ -70,13 +73,15 @@ class Valcom inherits Enemigo(velocidad = configuraciones.velocidadValcom(), nom
 
 }
 
-class Fantasma inherits Enemigo(velocidad = configuraciones.velocidadFantasma(), nombre = "fantasma", puedeAtravesarBloques = false){
+class Fantasma inherits Enemigo(velocidad = configuraciones.velocidadFantasma(), nombre = "fantasma", puedeAtravesarBloques = true){
   override method moverse(){
     const bombermanX = bomberman.position().x()
     const bombermanY = bomberman.position().y()
 
     var x //= if (bombermanX > position.x()) {derecha.siguiente(position).x()} else {izquierda.siguiente(position).x()}
     var y //= if (bombermanY > position.y()) {arriba.siguiente(position).y()} else {abajo.siguiente(position).y()} {}
+
+    //me hubiese gustado hacerlo mejor a este, tambien agregar otro enemigo que simplemente se mueva mas rapido para tener 1 distinto por nivel pero falta de tiempo...
 
     if(bombermanX > position.x()){
       x = derecha.siguiente(position).x()
@@ -106,4 +111,6 @@ class EnemigoMuerto{
   method initialize(){
     game.schedule(1000, {game.removeVisual(self)})
   }
+
+  method puedeAtraversare() = true
 }

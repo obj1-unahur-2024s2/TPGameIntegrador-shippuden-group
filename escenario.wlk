@@ -1,9 +1,14 @@
 import wollok.game.*
 import bomberman.*
+import config.*
 
 class Escenario {
-  const visuals=[]
+  const property visuals = []
+  const property visualsEnemigos = []
+                 
   const posicionInicial
+
+  method siguienteNivel() 
 
   method crearLineaHaciaDerecha(origenX,origenY,_ancho){
     (origenX..origenX + _ancho).forEach({n=>visuals.add(new Pared(position = game.at(n,origenY)))})
@@ -33,10 +38,22 @@ class Escenario {
   method cargarEnemigos()
 
   method renderizarNivel(){
-    visuals.forEach({visual=>game.addVisual(visual)})
+    const listaCompleta = visuals + visualsEnemigos
+    listaCompleta.forEach({visual=>game.addVisual(visual)})
   }
 
+  method eliminarVisuals(){
+    const listaCompleta = visuals + visualsEnemigos
+    listaCompleta.forEach({visual=>game.removeVisual(visual)})
+    //visuals.clear()
+  }
+
+  
+
   method cargar(){
+    configuraciones.nivelActual(self)
+    visuals.clear() //limpio la lista que despues voy a renderizar
+    visualsEnemigos.clear()
     bomberman.position(posicionInicial)
     game.addVisual(bomberman)
     self.crearBordes()
@@ -44,8 +61,7 @@ class Escenario {
     self.cargarBloques()
     self.cargarEnemigos()
     self.renderizarNivel()
-  }
-
+  } 
 }
 
 class Objeto{

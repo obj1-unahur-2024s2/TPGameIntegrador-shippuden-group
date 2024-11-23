@@ -8,7 +8,7 @@ import enemigo.*
 
 
 program juego {
-    //Configurar juego
+    //Configurar juego 
     game.title("rpg")
     game.cellSize(50) //esto ya es por defecto
     game.height(10)
@@ -16,13 +16,9 @@ program juego {
     game.boardGround("fondo.jpg")
     controles.activarControles()
 
-    nivel1.cargar()
     //nivelPrueba.cargar()
+    niveles.cargar(nivel1)
     ui.cargar()
-
-
-     // agregar a bomberman tambien tendria que estar dentro del nivel
-
     configuraciones.activarColisiones()
 
     game.start()

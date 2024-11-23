@@ -64,7 +64,8 @@ object bomberman{
 	method morir(){
 		estaVivo = false
 		self.mostrarAnimacionDeMuerte()
-		game.schedule(1000, {game.stop()})
+		
+		game.schedule(1000, {configuraciones.perder()})
 	}
 
 	//hice esto de otro objeto, porque no supe como ponerlo delante del tablero de nuevo
@@ -80,6 +81,7 @@ object bomberman{
 
 object bombermanMuerto{
 	var property position = game.at(1,1)//una posicion cualquiera
-	
+	method hacerDanio() = false
+	method puedeAtravesarse() = true
 	method image() = "bombermanMuerto.png"
 }
